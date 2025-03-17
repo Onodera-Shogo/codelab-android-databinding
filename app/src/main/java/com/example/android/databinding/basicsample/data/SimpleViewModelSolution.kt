@@ -42,6 +42,14 @@ class SimpleViewModelSolution : ViewModel() {
         }
     }
 
+    val message: LiveData<String> =  Transformations.map(_likes) {
+        when {
+            it > 9 -> "Expert"
+            it > 4 -> "Intermediate"
+            else -> "Beginner"
+        }
+    }
+
     fun onLike() {
         _likes.value = (_likes.value ?: 0) + 1
     }
